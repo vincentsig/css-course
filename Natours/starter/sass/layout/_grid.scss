@@ -1,24 +1,30 @@
 .row {
   max-width: $grid-width;
+  //   max-width permet de faire que la width va s'adapter au view port si elle est plus petit que celle specifié.
+  background-color: #eee;
   margin: 0 auto;
+  // permet de center la row dans le view port. 0 top and bottom et sur les coté auto. auto sera donc le meme margin, center block element inside an other block element.
 
   &:not(:last-child) {
     margin-bottom: $gutter-vertical;
   }
+  // not permet de dire select tout sauf le last child. donc ici on met un margin bottom sur tout sauf le last child.
 
   @include clearfix;
 
   [class^="col-"] {
     float: left;
-
+    background-color: red;
     &:not(:last-child) {
       margin-right: $gutter-horizontal;
     }
   }
+  // select tout les element qui on pour attibut la valeur donné, le ^ permet de selectionner juste le début.
 
   .col-1-of-2 {
-    width: calc((100% - #{$gutter-horizontal}) / 3);
+    width: calc((100% - #{$gutter-horizontal}) / 2);
   }
+  // #{} cést la syntax pour metter une variable a línterieur de la function calc ( voir meme dáutre fonction je pense).
 
   .col-1-of-3 {
     width: calc((100% - 2 * #{$gutter-horizontal}) / 3);
@@ -40,7 +46,7 @@
     );
   }
 
-  .col-3-of-4 {
+  .col-3-of-3 {
     width: calc(
       3 * ((100% - 3 * #{$gutter-horizontal}) / 4) + 2 * #{$gutter-horizontal}
     );

@@ -1,117 +1,191 @@
-/*
-COLORS:
+@charset "UTF-8";
+.btn {
+  /* link est une pseudo class a un specific state ici lorsquíl sagit d'un element d'ancrage qui fonctionne comme un lien */
+  /* le trick est de styliser un element identique a l element creer et de faire une annimation dessus sur un certain comportement. */
+  /* le pseudo element est considerer comme un child de l element, donc si on dit que le heigth est de 100% cela signifie que cést 100% de l element parent ici le btn */ }
+  .btn:link, .btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all 0.2sec;
+    position: relative; }
+  .btn:hover {
+    /* epsilon axe move from the top to the botton donc on doit avoir une valeur negative si on veut le faire bouger vers le haut */
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+    .btn:hover::after {
+      /* c est un after pseudo element seulment sur le hover et on veut que le bouton grow */
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0; }
+  .btn:active {
+    transform: translateY(0px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); }
+  .btn--white {
+    background-color: #fff;
+    color: #777; }
+    .btn--white::after {
+      background-color: white; }
+  .btn::after {
+    content: "";
+    /*on doit toujours preciser le content sur un pseudo after element*/
+    display: inline-block;
+    /*meme chose*/
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transition: all 0.4s; }
+  .btn--animated {
+    animation: moveInBottom 0.5s ease-out 0.75s;
+    /* cela automatiquement apply avant que lánimation commence */
+    animation-fill-mode: backwards; }
 
-Light green: #7ed56f
-Medium green: #55c57a
-Dark green: #28b485
+@keyframes moveInLeft {
+  /* where the animation start */
+  0% {
+    opacity: 0;
+    /* on veut que lánimation commence plus vers la gauche etant donne que le titre du site est autre centre on veut du coup que ce soit negatif pour avoir l'impression que lánimation demarre vers la gauche */
+    transform: translateX(-10rem); }
+  80% {
+    transform: translateX(1rem); }
+  /* where the elenent stop */
+  100% {
+    opacity: 1;
+    transform: translateX(0rem); } }
 
-*/
+@keyframes moveInRight {
+  /* where the animation start */
+  0% {
+    opacity: 0;
+    /* on veut que lánimation commence plus vers la gauche etant donne que le titre du site est autre centre on veut du coup que ce soit negatif pour avoir l'impression que lánimation demarre vers la gauche */
+    transform: translateX(-10rem); }
+  80% {
+    transform: translateX(-1rem); }
+  /* where the elenent stop */
+  100% {
+    opacity: 1;
+    transform: translateX0(0px); } }
 
-* {
+@keyframes moveInBottom {
+  /* where the animation start */
+  0% {
+    opacity: 0;
+    /* on veut que lánimation commence plus vers la gauche etant donne que le titre du site est autre centre on veut du coup que ce soit negatif pour avoir l'impression que lánimation demarre vers la gauche */
+    transform: translateY(3rem); }
+  /* where the elenent stop */
+  100% {
+    opacity: 1;
+    transform: translateX0(0px); } }
+
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
+  box-sizing: inherit;
+  /* La propriété CSS box-sizing définit la façon dont la hauteur et la largeur totale d'un élément est calculée
+  en gros border-box garde la taille du container et si il y a du padding ou une marge elle sera applique dans la box 
+  content-box par contre va agrandir la taille total du container le padding et le border aura donc une influence sur le width et le height de l'element */ }
+
+html {
+  font-size: 62.5%; }
+
+body {
+  box-sizing: border-box; }
 
 body {
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.7;
+  /* line-height represente l ecart entre les lignes */
   color: #777;
-  padding: 30px;
-}
+  padding: 3rem;
+  /* padding n a pas dineritance donc cela va appliquer ca sur la page */ }
+
+/* block element occupe l entiere width qu il ont de disponible et en plus il revienne a la ligne il creer des line break avant et apres eux. */
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  margin-bottom: 6rem; }
+  .heading-primary--main {
+    display: block;
+    font-size: 6rem;
+    font-weight: 400;
+    letter-spacing: 3.5rem;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    /* quand l'animation va demarrer */
+    /* animation-delay: ; */
+    /* animation-iteration-count: ; */
+    /* l animation se repete le nombre de fois specifié */
+    animation-timing-function: ease-out;
+    /* demarre lentement et accelere */ }
+  .heading-primary--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1.75rem;
+    animation: moveInRight 1s ease-out; }
 
 .header {
-  height: 95vh; /* vh = viewport*/
-  background-image: linear-gradient(
-      to right bottom,
-      rgba(29, 243, 136, 0.76),
-      rgba(78, 201, 160, 0.8)
-    ),
-    url("../img/hero.jpg");
+  height: 95vh;
+  /* 95% pour du viewport en gros toujours 95% de la fenetre */
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.8), rgba(40, 180, 133, 0.8)), url("../img/hero.jpg");
+  /* gradien allant de la droite en bas avec les directions right bottom avec les deux couleur */
   background-size: cover;
+  /* peut import le width de la fenetre ou de lélement il va essayer de feet l element de la box | Specifies the size of the background images. */
   background-position: top;
+  /* l image au top ne sera pas crop */
   position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+  /* les positions demarre au niveau du parent element qui a une position relatiive */ }
+  .header__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem; }
+  .header__logo {
+    height: 3.5rem; }
+  .header__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    /* au dessus c est la position par rapport a l element parent */
+    transform: translate(-50%, -50%);
+    /* translate permet dans ce cas de replacer lélement par rapport a l element lui meme ce qui replace l element vraiment au centre*/
+    text-align: center;
+    /* parce que le bouton est un inline element on peut l aligner par rapport a son container vu que c est consideré comme du texte */ }
 
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-}
-
-.logo-box {
-  position: absolute;
-  top: 40px;
-  left: 40px;
-}
-
-.logo {
-  height: 35px;
-}
-
-.text-box {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(
-    -50%,
-    -50%
-  ); /* on redéplace l'élément pour qu'il soit centré, le top left etait par rapport a l'élément parent*/
-}
-
-.heading-primary {
-  color: white;
-  text-transform: uppercase;
-
-  backface-visibility: hidden; /* empeche de faire checker l'animation */
-}
-
-.heading-primary-main {
-  display: block;
-  font-size: 60px;
-  font-weight: 400;
-  letter-spacing: 35px;
-
-  animation-name: moveInLeft;
-  animation-duration: 1s;
-  animation-timing-function: ease-out;
-}
-
-.heading-primary-sub {
-  display: block;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 17.4px;
-
-  animation: moveInRight 1s ease-out;
-}
-
-@keyframes moveInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-100px);
-  }
-
-  80% {
-    transform: translateX(10px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
-
-@keyframes moveInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(100px);
-  }
-
-  80% {
-    transform: translateX(-10px);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translatX(0);
-  }
-}
+.row {
+  max-width: 114rem;
+  background-color: #eee;
+  margin: 0 auto; }
+  .row:not(:last-child) {
+    margin-bottom: 8rem; }
+  .row::after {
+    content: "";
+    display: table;
+    clear: both; }
+  .row [class^="col-"] {
+    float: left;
+    background-color: red; }
+    .row [class^="col-"]:not(:last-child) {
+      margin-right: 6rem; }
+  .row .col-1-of-2 {
+    width: calc((100% - 6rem) / 2); }
+  .row .col-1-of-3 {
+    width: calc((100% - 2 * 6rem) / 3); }
+  .row .col-2-of-3 {
+    width: calc( 2 * ((100% - 2 * 6rem) / 3) + 6rem); }
+  .row .col-1-of-4 {
+    width: calc((100% - 3 * 6rem) / 4); }
+  .row .col-2-of-4 {
+    width: calc( 2 * ((100% - 3 * 6rem) / 4) + 6rem); }
+  .row .col-3-of-3 {
+    width: calc( 3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem); }

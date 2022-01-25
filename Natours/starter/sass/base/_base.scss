@@ -1,0 +1,20 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+
+  /* La propriété CSS box-sizing définit la façon dont la hauteur et la largeur totale d'un élément est calculée
+  en gros border-box garde la taille du container et si il y a du padding ou une marge elle sera applique dans la box 
+  content-box par contre va agrandir la taille total du container le padding et le border aura donc une influence sur le width et le height de l'element */
+}
+
+html {
+  // this defines what 1rem is
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+}

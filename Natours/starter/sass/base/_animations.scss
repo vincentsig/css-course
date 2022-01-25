@@ -1,0 +1,50 @@
+@keyframes moveInLeft {
+  /* where the animation start */
+  0% {
+    opacity: 0;
+    /* on veut que lánimation commence plus vers la gauche etant donne que le titre du site est autre centre on veut du coup que ce soit negatif pour avoir l'impression que lánimation demarre vers la gauche */
+    transform: translateX(-10rem);
+  }
+
+  80% {
+    transform: translateX(1rem);
+  }
+  /* where the elenent stop */
+  100% {
+    opacity: 1;
+    transform: translateX(0rem);
+  }
+}
+
+@keyframes moveInRight {
+  /* where the animation start */
+  0% {
+    opacity: 0;
+    /* on veut que lánimation commence plus vers la gauche etant donne que le titre du site est autre centre on veut du coup que ce soit negatif pour avoir l'impression que lánimation demarre vers la gauche */
+    transform: translateX(-10rem);
+  }
+
+  80% {
+    transform: translateX(-1rem);
+  }
+  /* where the elenent stop */
+  100% {
+    opacity: 1;
+    transform: translateX0(0px);
+  }
+}
+
+@keyframes moveInBottom {
+  /* where the animation start */
+  0% {
+    opacity: 0;
+    /* on veut que lánimation commence plus vers la gauche etant donne que le titre du site est autre centre on veut du coup que ce soit negatif pour avoir l'impression que lánimation demarre vers la gauche */
+    transform: translateY(3rem);
+  }
+
+  /* where the elenent stop */
+  100% {
+    opacity: 1;
+    transform: translateX0(0px);
+  }
+}

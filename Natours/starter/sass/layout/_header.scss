@@ -1,0 +1,39 @@
+.header {
+  height: 95vh;
+  /* 95% pour du viewport en gros toujours 95% de la fenetre */
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url("../img/hero.jpg");
+  /* gradien allant de la droite en bas avec les directions right bottom avec les deux couleur */
+  background-size: cover;
+  /* peut import le width de la fenetre ou de lélement il va essayer de feet l element de la box | Specifies the size of the background images. */
+  background-position: top;
+  /* l image au top ne sera pas crop */
+  position: relative;
+
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  } /* les positions demarre au niveau du parent element qui a une position relatiive */
+
+  &__logo {
+    height: 3.5rem;
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    /* au dessus c est la position par rapport a l element parent */
+    transform: translate(-50%, -50%);
+    /* translate permet dans ce cas de replacer lélement par rapport a l element lui meme ce qui replace l element vraiment au centre*/
+    text-align: center;
+    /* parce que le bouton est un inline element on peut l aligner par rapport a son container vu que c est consideré comme du texte */
+  }
+}

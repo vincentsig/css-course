@@ -1,0 +1,59 @@
+.btn {
+  /* link est une pseudo class a un specific state ici lorsquíl sagit d'un element d'ancrage qui fonctionne comme un lien */
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all 0.2sec;
+    position: relative;
+  }
+
+  &:hover {
+    /* epsilon axe move from the top to the botton donc on doit avoir une valeur negative si on veut le faire bouger vers le haut */
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+
+    &::after {
+      /* c est un after pseudo element seulment sur le hover et on veut que le bouton grow */
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(0px);
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+    &::after {
+      background-color: white;
+    }
+  }
+
+  /* le trick est de styliser un element identique a l element creer et de faire une annimation dessus sur un certain comportement. */
+  /* le pseudo element est considerer comme un child de l element, donc si on dit que le heigth est de 100% cela signifie que cést 100% de l element parent ici le btn */
+  &::after {
+    content: ""; /*on doit toujours preciser le content sur un pseudo after element*/
+    display: inline-block; /*meme chose*/
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  &--animated {
+    animation: moveInBottom 0.5s ease-out 0.75s;
+    /* cela automatiquement apply avant que lánimation commence */
+    animation-fill-mode: backwards;
+  }
+}
